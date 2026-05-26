@@ -1,1 +1,489 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TikTok Downloader</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  width: 100%;
+  --grid-color: #1e1e1e;
+  background-color: #0c0c0c;
+  background-image:
+    linear-gradient(0deg, transparent 24%, var(--grid-color) 25%, var(--grid-color) 26%, transparent 27%, transparent 74%, var(--grid-color) 75%, var(--grid-color) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, var(--grid-color) 25%, var(--grid-color) 26%, transparent 27%, transparent 74%, var(--grid-color) 75%, var(--grid-color) 76%, transparent 77%, transparent);
+  background-size: 55px 55px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 20px 60px;
+}
+
+.tt-inner {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+.tt-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.tt-icon {
+  width: 56px;
+  height: 56px;
+  background: #ff0050;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(255, 0, 80, 0.35);
+}
+
+.tt-icon svg {
+  width: 30px;
+  height: 30px;
+  fill: white;
+}
+
+.tt-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.tt-subtitle {
+  font-size: 13px;
+  color: #555;
+  font-weight: 400;
+  margin-top: -6px;
+}
+
+.tt-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.tt-input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.tt-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.tt-input::placeholder {
+  color: #555;
+}
+
+.tt-input:focus {
+  border-color: rgba(255, 0, 80, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tt-btn {
+  background: #ff0050;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 22px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.15s, opacity 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(255, 0, 80, 0.3);
+}
+
+.tt-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(255, 0, 80, 0.4);
+}
+
+.tt-btn:active {
+  transform: scale(0.97);
+}
+
+.tt-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.tt-status {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 14px;
+}
+
+.tt-status.loading {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #888;
+}
+
+.tt-status.error {
+  display: flex;
+  background: rgba(255, 0, 80, 0.1);
+  border: 1px solid rgba(255, 0, 80, 0.2);
+  color: #ff6688;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #ff0050;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.tt-result {
+  display: none;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.tt-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 5;
+  overflow: hidden;
+}
+
+.tt-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tt-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+.tt-overlay-info {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  right: 20px;
+}
+
+.tt-vtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tt-vauthor {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.tt-result-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tt-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.tt-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.tt-stat i {
+  font-size: 14px;
+}
+
+
+.tt-dl-row {
+  display: flex;
+  gap: 10px;
+}
+
+.tt-dl-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+  border: none;
+}
+
+.tt-dl-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.tt-dl-btn:active {
+  transform: scale(0.97);
+}
+
+.tt-dl-primary {
+  background: #ff0050;
+  color: white;
+  box-shadow: 0 4px 18px rgba(255, 0, 80, 0.3);
+}
+
+.tt-dl-secondary {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.tt-footer {
+  font-size: 12px;
+  color: #333;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.tt-footer span {
+  color: #ff0050;
+}
+
+
+@media (max-width: 480px) {
+  body {
+    padding: 32px 14px 48px;
+  }
+
+  .tt-title {
+    font-size: 22px;
+  }
+
+  .tt-input-row {
+    flex-direction: column;
+  }
+
+  .tt-btn {
+    justify-content: center;
+  }
+
+  .tt-dl-row {
+    flex-direction: column;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<div class="tt-inner">
+
+
+  <div class="tt-logo">
+    <div class="tt-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.41a8.16 8.16 0 004.77 1.52V7.48a4.85 4.85 0 01-1-.79z"/>
+      </svg>
+    </div>
+    <div class="tt-title">TikTok Downloader</div>
+    <div class="tt-subtitle">TikTok Downloader, Download TikTok Video without watermark</div>
+  </div>
+
+
+  <div class="tt-card">
+    <div class="tt-input-row">
+      <input
+        class="tt-input"
+        id="tt-url"
+        type="text"
+        placeholder="Paste TikTok link here…"
+        autocomplete="off"
+      />
+      <button class="tt-btn" id="tt-fetchbtn" onclick="ttFetch()">
+        <i class="ti ti-download"></i>
+        Fetch
+      </button>
+    </div>
+    <div class="tt-status" id="tt-status">
+      <div class="spinner" id="tt-spinner"></div>
+      <span id="tt-status-text">Fetching video…</span>
+    </div>
+  </div>
+
+
+  <div class="tt-result" id="tt-result">
+    <div class="tt-thumb-wrap">
+      <img class="tt-thumb" id="tt-thumb" src="" alt="Video thumbnail" />
+      <div class="tt-thumb-overlay"></div>
+      <div class="tt-overlay-info">
+        <div class="tt-vtitle" id="tt-vtitle"></div>
+        <div class="tt-vauthor" id="tt-vauthor"></div>
+      </div>
+    </div>
+    <div class="tt-result-body">
+      <div class="tt-stats">
+        <div class="tt-stat">
+          <i class="ti ti-clock"></i>
+          <span id="tt-dur"></span>
+        </div>
+        <div class="tt-stat">
+          <i class="ti ti-eye"></i>
+          <span id="tt-plays"></span>
+        </div>
+      </div>
+      <div class="tt-dl-row">
+        <a class="tt-dl-btn tt-dl-primary" id="tt-nowm" href="#" target="_blank">
+          <i class="ti ti-sparkles"></i>
+          No Watermark
+        </a>
+        <a class="tt-dl-btn tt-dl-secondary" id="tt-wm" href="#" target="_blank">
+          <i class="ti ti-download"></i>
+          With Watermark
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="tt-footer">Made by <span>RetrivedMods</span></div>
+
+</div>
+
+<script>
+async function ttFetch() {
+  const url = document.getElementById('tt-url').value.trim();
+  const status = document.getElementById('tt-status');
+  const result = document.getElementById('tt-result');
+  const btn = document.getElementById('tt-fetchbtn');
+  const spinner = document.getElementById('tt-spinner');
+  const statusText = document.getElementById('tt-status-text');
+
+
+  status.className = 'tt-status';
+  result.style.display = 'none';
+
+  if (!url) {
+    status.className = 'tt-status error';
+    spinner.style.display = 'none';
+    statusText.textContent = 'Please paste a TikTok URL first.';
+    return;
+  }
+
+
+  status.className = 'tt-status loading';
+  spinner.style.display = 'block';
+  statusText.textContent = 'Fetching video info…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(`https://wclient.in/apis/tiktok.php?url=${encodeURIComponent(url)}`);
+    const data = await res.json();
+
+    if (!data.status) {
+      status.className = 'tt-status error';
+      spinner.style.display = 'none';
+      statusText.textContent = data.message || 'Failed to fetch video.';
+      btn.disabled = false;
+      return;
+    }
+
+
+    document.getElementById('tt-thumb').src = data.thumbnail;
+    document.getElementById('tt-vtitle').textContent = data.title;
+    document.getElementById('tt-vauthor').textContent = '@' + data.username;
+    document.getElementById('tt-dur').textContent = data.duration + 's';
+    document.getElementById('tt-plays').textContent = Number(data.play_count).toLocaleString() + ' plays';
+    document.getElementById('tt-nowm').href = data.video_nowm;
+    document.getElementById('tt-wm').href = data.video_wm;
+
+    status.className = 'tt-status';
+    result.style.display = 'block';
+
+  } catch (e) {
+    status.className = 'tt-status error';
+    spinner.style.display = 'none';
+    statusText.textContent = 'Network error. Please try again.';
+  }
+
+  btn.disabled = false;
+}
+
+
+document.getElementById('tt-url').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') ttFetch();
+});
+</script>
+
+</body>
+</html>
+

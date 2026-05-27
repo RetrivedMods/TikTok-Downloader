@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -264,7 +263,6 @@ body {
   font-size: 14px;
 }
 
-
 .tt-dl-row {
   display: flex;
   gap: 10px;
@@ -281,19 +279,25 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
   font-weight: 600;
-  text-decoration: none;
   cursor: pointer;
   transition: transform 0.15s, opacity 0.15s;
   border: none;
+  position: relative;
 }
 
-.tt-dl-btn:hover {
+.tt-dl-btn:hover:not(:disabled) {
   opacity: 0.88;
   transform: translateY(-1px);
 }
 
-.tt-dl-btn:active {
+.tt-dl-btn:active:not(:disabled) {
   transform: scale(0.97);
+}
+
+.tt-dl-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .tt-dl-primary {
@@ -308,6 +312,17 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
+/* Download progress bar inside button */
+.tt-dl-btn .dl-progress {
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 0 0 12px 12px;
+  width: 0%;
+  transition: width 0.2s;
+}
+
 .tt-footer {
   font-size: 12px;
   color: #333;
@@ -318,7 +333,6 @@ body {
 .tt-footer span {
   color: #ff0050;
 }
-
 
 @media (max-width: 480px) {
   body {
@@ -348,7 +362,6 @@ body {
 
 <div class="tt-inner">
 
-
   <div class="tt-logo">
     <div class="tt-icon">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -356,9 +369,8 @@ body {
       </svg>
     </div>
     <div class="tt-title">TikTok Downloader</div>
-    <div class="tt-subtitle">TikTok Downloader, Download TikTok Video without watermark</div>
+    <div class="tt-subtitle">Download TikTok videos without watermark</div>
   </div>
-
 
   <div class="tt-card">
     <div class="tt-input-row">
@@ -379,7 +391,6 @@ body {
       <span id="tt-status-text">Fetching video…</span>
     </div>
   </div>
-
 
   <div class="tt-result" id="tt-result">
     <div class="tt-thumb-wrap">
@@ -402,88 +413,175 @@ body {
         </div>
       </div>
       <div class="tt-dl-row">
-        <a class="tt-dl-btn tt-dl-primary" id="tt-nowm" href="#" target="_blank">
-          <i class="ti ti-sparkles"></i>
-          No Watermark
-        </a>
-        <a class="tt-dl-btn tt-dl-secondary" id="tt-wm" href="#" target="_blank">
-          <i class="ti ti-download"></i>
-          With Watermark
-        </a>
+        <button class="tt-dl-btn tt-dl-primary" id="tt-nowm" onclick="startDownload('nowm')">
+          <i class="ti ti-sparkles" id="tt-nowm-icon"></i>
+          <span id="tt-nowm-label">No Watermark</span>
+          <div class="dl-progress" id="tt-nowm-progress"></div>
+        </button>
+        <button class="tt-dl-btn tt-dl-secondary" id="tt-wm" onclick="startDownload('wm')">
+          <i class="ti ti-download" id="tt-wm-icon"></i>
+          <span id="tt-wm-label">With Watermark</span>
+          <div class="dl-progress" id="tt-wm-progress"></div>
+        </button>
       </div>
     </div>
   </div>
-
 
   <div class="tt-footer">Made by <span>RetrivedMods</span></div>
 
 </div>
 
 <script>
-async function ttFetch() {
-  const url = document.getElementById('tt-url').value.trim();
-  const status = document.getElementById('tt-status');
-  const result = document.getElementById('tt-result');
-  const btn = document.getElementById('tt-fetchbtn');
-  const spinner = document.getElementById('tt-spinner');
-  const statusText = document.getElementById('tt-status-text');
+  let videoUrls = { nowm: '', wm: '' };
+  let videoTitle = 'tiktok-video';
 
+  async function ttFetch() {
+    const url = document.getElementById('tt-url').value.trim();
+    const status = document.getElementById('tt-status');
+    const result = document.getElementById('tt-result');
+    const btn = document.getElementById('tt-fetchbtn');
+    const spinner = document.getElementById('tt-spinner');
+    const statusText = document.getElementById('tt-status-text');
 
-  status.className = 'tt-status';
-  result.style.display = 'none';
+    status.className = 'tt-status';
+    result.style.display = 'none';
 
-  if (!url) {
-    status.className = 'tt-status error';
-    spinner.style.display = 'none';
-    statusText.textContent = 'Please paste a TikTok URL first.';
-    return;
-  }
-
-
-  status.className = 'tt-status loading';
-  spinner.style.display = 'block';
-  statusText.textContent = 'Fetching video info…';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch(`https://wclient.in/apis/tiktok.php?url=${encodeURIComponent(url)}`);
-    const data = await res.json();
-
-    if (!data.status) {
+    if (!url) {
       status.className = 'tt-status error';
       spinner.style.display = 'none';
-      statusText.textContent = data.message || 'Failed to fetch video.';
-      btn.disabled = false;
+      statusText.textContent = 'Please paste a TikTok URL first.';
       return;
     }
 
+    status.className = 'tt-status loading';
+    spinner.style.display = 'block';
+    statusText.textContent = 'Fetching video info…';
+    btn.disabled = true;
 
-    document.getElementById('tt-thumb').src = data.thumbnail;
-    document.getElementById('tt-vtitle').textContent = data.title;
-    document.getElementById('tt-vauthor').textContent = '@' + data.username;
-    document.getElementById('tt-dur').textContent = data.duration + 's';
-    document.getElementById('tt-plays').textContent = Number(data.play_count).toLocaleString() + ' plays';
-    document.getElementById('tt-nowm').href = data.video_nowm;
-    document.getElementById('tt-wm').href = data.video_wm;
+    try {
+      const res = await fetch(`https://wclient.in/apis/tiktok.php?url=${encodeURIComponent(url)}`);
+      const data = await res.json();
 
-    status.className = 'tt-status';
-    result.style.display = 'block';
+      if (!data.status) {
+        status.className = 'tt-status error';
+        spinner.style.display = 'none';
+        statusText.textContent = data.message || 'Failed to fetch video.';
+        btn.disabled = false;
+        return;
+      }
 
-  } catch (e) {
-    status.className = 'tt-status error';
-    spinner.style.display = 'none';
-    statusText.textContent = 'Network error. Please try again.';
+      document.getElementById('tt-thumb').src = data.thumbnail;
+      document.getElementById('tt-vtitle').textContent = data.title;
+      document.getElementById('tt-vauthor').textContent = '@' + data.username;
+      document.getElementById('tt-dur').textContent = data.duration + 's';
+      document.getElementById('tt-plays').textContent = Number(data.play_count).toLocaleString() + ' plays';
+
+  
+      videoUrls.nowm = data.video_nowm;
+      videoUrls.wm   = data.video_wm;
+      videoTitle = (data.title || 'tiktok-video').replace(/[^a-z0-9]/gi, '_').substring(0, 60);
+
+
+      resetBtn('nowm');
+      resetBtn('wm');
+
+      status.className = 'tt-status';
+      result.style.display = 'block';
+
+    } catch (e) {
+      status.className = 'tt-status error';
+      spinner.style.display = 'none';
+      statusText.textContent = 'Network error. Please try again.';
+    }
+
+    btn.disabled = false;
   }
 
-  btn.disabled = false;
-}
+  function resetBtn(type) {
+    const btn      = document.getElementById(`tt-${type}`);
+    const icon     = document.getElementById(`tt-${type}-icon`);
+    const label    = document.getElementById(`tt-${type}-label`);
+    const progress = document.getElementById(`tt-${type}-progress`);
+    btn.disabled       = false;
+    icon.className     = type === 'nowm' ? 'ti ti-sparkles' : 'ti ti-download';
+    label.textContent  = type === 'nowm' ? 'No Watermark' : 'With Watermark';
+    progress.style.width = '0%';
+  }
 
+  async function startDownload(type) {
+    const videoUrl = videoUrls[type];
+    if (!videoUrl) return;
 
-document.getElementById('tt-url').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') ttFetch();
-});
+    const btn      = document.getElementById(`tt-${type}`);
+    const icon     = document.getElementById(`tt-${type}-icon`);
+    const label    = document.getElementById(`tt-${type}-label`);
+    const progress = document.getElementById(`tt-${type}-progress`);
+
+    btn.disabled      = true;
+    icon.className    = 'ti ti-loader-2';
+    icon.style.animation = 'spin 0.7s linear infinite';
+    label.textContent = 'Downloading…';
+    progress.style.width = '0%';
+
+    try {
+      const response = await fetch(videoUrl);
+
+      if (!response.ok) throw new Error('Fetch failed');
+
+      const contentLength = response.headers.get('Content-Length');
+      const total = contentLength ? parseInt(contentLength, 10) : 0;
+      const reader = response.body.getReader();
+      const chunks = [];
+      let received = 0;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        received += value.length;
+        if (total > 0) {
+          progress.style.width = Math.min(100, Math.round((received / total) * 100)) + '%';
+        } else {
+  
+          progress.style.transition = 'none';
+          progress.style.width = '60%';
+        }
+      }
+
+      progress.style.width = '100%';
+
+      const blob = new Blob(chunks, { type: 'video/mp4' });
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = `${videoTitle}_${type === 'nowm' ? 'no_watermark' : 'watermark'}.mp4`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+  
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+
+      icon.style.animation = '';
+      icon.className = 'ti ti-check';
+      label.textContent = 'Downloaded!';
+
+      setTimeout(() => resetBtn(type), 3000);
+
+    } catch (err) {
+      icon.style.animation = '';
+      icon.className = 'ti ti-alert-triangle';
+      label.textContent = 'Failed — Retry';
+      progress.style.width = '0%';
+      btn.disabled = false;
+      console.error('Download error:', err);
+    }
+  }
+
+  document.getElementById('tt-url').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') ttFetch();
+  });
 </script>
 
 </body>
 </html>
-

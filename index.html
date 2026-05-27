@@ -7,12 +7,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -54,7 +49,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(255, 0, 80, 0.35);
+  box-shadow: 0 0 30px rgba(255,0,80,0.35);
 }
 
 .tt-icon svg {
@@ -66,7 +61,7 @@ body {
 .tt-title {
   font-size: 28px;
   font-weight: 700;
-  color: #ffffff;
+  color: #fff;
   letter-spacing: -0.5px;
 }
 
@@ -79,8 +74,8 @@ body {
 
 .tt-card {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 20px;
   padding: 24px;
 }
@@ -92,8 +87,8 @@ body {
 
 .tt-input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 12px;
   padding: 14px 18px;
   color: #fff;
@@ -103,13 +98,11 @@ body {
   transition: border-color 0.2s, background 0.2s;
 }
 
-.tt-input::placeholder {
-  color: #555;
-}
+.tt-input::placeholder { color: #555; }
 
 .tt-input:focus {
-  border-color: rgba(255, 0, 80, 0.5);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255,0,80,0.5);
+  background: rgba(255,255,255,0.08);
 }
 
 .tt-btn {
@@ -127,24 +120,12 @@ body {
   gap: 8px;
   transition: transform 0.15s, opacity 0.15s, box-shadow 0.2s;
   white-space: nowrap;
-  box-shadow: 0 4px 20px rgba(255, 0, 80, 0.3);
+  box-shadow: 0 4px 20px rgba(255,0,80,0.3);
 }
 
-.tt-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(255, 0, 80, 0.4);
-}
-
-.tt-btn:active {
-  transform: scale(0.97);
-}
-
-.tt-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-}
+.tt-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(255,0,80,0.4); }
+.tt-btn:active { transform: scale(0.97); }
+.tt-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 .tt-status {
   display: none;
@@ -159,40 +140,40 @@ body {
 
 .tt-status.loading {
   display: flex;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
   color: #888;
 }
 
 .tt-status.error {
   display: flex;
-  background: rgba(255, 0, 80, 0.1);
-  border: 1px solid rgba(255, 0, 80, 0.2);
+  background: rgba(255,0,80,0.1);
+  border: 1px solid rgba(255,0,80,0.2);
   color: #ff6688;
 }
 
 .spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255,255,255,0.15);
   border-top-color: #ff0050;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   flex-shrink: 0;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
+
 
 .tt-result {
   display: none;
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 20px;
   overflow: hidden;
 }
+
 
 .tt-thumb-wrap {
   position: relative;
@@ -211,7 +192,7 @@ body {
 .tt-thumb-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.85) 100%);
 }
 
 .tt-overlay-info {
@@ -235,9 +216,113 @@ body {
 
 .tt-vauthor {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255,255,255,0.6);
   font-weight: 500;
 }
+
+
+.tt-slideshow {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 5;
+  overflow: hidden;
+  background: #111;
+}
+
+.tt-slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+.tt-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.tt-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tt-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.85) 100%);
+  pointer-events: none;
+}
+
+
+.tt-slide-info {
+  position: absolute;
+  bottom: 16px;
+  left: 20px;
+  right: 20px;
+}
+
+.tt-slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  z-index: 10;
+  font-size: 18px;
+}
+
+.tt-slide-nav:hover { background: rgba(255,0,80,0.7); }
+.tt-slide-nav.prev { left: 12px; }
+.tt-slide-nav.next { right: 12px; }
+.tt-slide-nav:disabled { opacity: 0.25; cursor: default; }
+
+.tt-slide-counter {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.4px;
+  z-index: 10;
+}
+
+.tt-slide-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 0 4px;
+}
+
+.tt-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.tt-dot.active {
+  background: #ff0050;
+  transform: scale(1.3);
+}
+
 
 .tt-result-body {
   padding: 20px 24px;
@@ -259,9 +344,7 @@ body {
   color: #555;
 }
 
-.tt-stat i {
-  font-size: 14px;
-}
+.tt-stat i { font-size: 14px; }
 
 .tt-dl-row {
   display: flex;
@@ -283,39 +366,32 @@ body {
   transition: transform 0.15s, opacity 0.15s;
   border: none;
   position: relative;
+  overflow: hidden;
 }
 
-.tt-dl-btn:hover:not(:disabled) {
-  opacity: 0.88;
-  transform: translateY(-1px);
-}
-
-.tt-dl-btn:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.tt-dl-btn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  transform: none;
-}
+.tt-dl-btn:hover:not(:disabled) { opacity: 0.88; transform: translateY(-1px); }
+.tt-dl-btn:active:not(:disabled) { transform: scale(0.97); }
+.tt-dl-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
 
 .tt-dl-primary {
   background: #ff0050;
   color: white;
-  box-shadow: 0 4px 18px rgba(255, 0, 80, 0.3);
+  box-shadow: 0 4px 18px rgba(255,0,80,0.3);
 }
 
 .tt-dl-secondary {
-  background: rgba(255, 255, 255, 0.07);
-  color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.1) !important;
 }
 
-/* Download progress bar inside button */
+
+.tt-dl-single { flex: 1; }
+
 .tt-dl-btn .dl-progress {
   position: absolute;
-  left: 0; bottom: 0;
+  left: 0;
+  bottom: 0;
   height: 3px;
   background: rgba(255,255,255,0.5);
   border-radius: 0 0 12px 12px;
@@ -330,32 +406,15 @@ body {
   letter-spacing: 0.3px;
 }
 
-.tt-footer span {
-  color: #ff0050;
-}
+.tt-footer span { color: #ff0050; }
 
 @media (max-width: 480px) {
-  body {
-    padding: 32px 14px 48px;
-  }
-
-  .tt-title {
-    font-size: 22px;
-  }
-
-  .tt-input-row {
-    flex-direction: column;
-  }
-
-  .tt-btn {
-    justify-content: center;
-  }
-
-  .tt-dl-row {
-    flex-direction: column;
-  }
+  body { padding: 32px 14px 48px; }
+  .tt-title { font-size: 22px; }
+  .tt-input-row { flex-direction: column; }
+  .tt-btn { justify-content: center; }
+  .tt-dl-row { flex-direction: column; }
 }
-
 </style>
 </head>
 <body>
@@ -369,21 +428,14 @@ body {
       </svg>
     </div>
     <div class="tt-title">TikTok Downloader</div>
-    <div class="tt-subtitle">Download TikTok videos without watermark</div>
+    <div class="tt-subtitle">Download TikTok videos &amp; image posts</div>
   </div>
 
   <div class="tt-card">
     <div class="tt-input-row">
-      <input
-        class="tt-input"
-        id="tt-url"
-        type="text"
-        placeholder="Paste TikTok link here…"
-        autocomplete="off"
-      />
+      <input class="tt-input" id="tt-url" type="text" placeholder="Paste TikTok link here…" autocomplete="off" />
       <button class="tt-btn" id="tt-fetchbtn" onclick="ttFetch()">
-        <i class="ti ti-download"></i>
-        Fetch
+        <i class="ti ti-download"></i> Fetch
       </button>
     </div>
     <div class="tt-status" id="tt-status">
@@ -393,26 +445,38 @@ body {
   </div>
 
   <div class="tt-result" id="tt-result">
-    <div class="tt-thumb-wrap">
-      <img class="tt-thumb" id="tt-thumb" src="" alt="Video thumbnail" />
-      <div class="tt-thumb-overlay"></div>
-      <div class="tt-overlay-info">
-        <div class="tt-vtitle" id="tt-vtitle"></div>
-        <div class="tt-vauthor" id="tt-vauthor"></div>
+
+
+    <div id="tt-video-view">
+      <div class="tt-thumb-wrap">
+        <img class="tt-thumb" id="tt-thumb" src="" alt="Video thumbnail" crossorigin="anonymous" />
+        <div class="tt-thumb-overlay"></div>
+        <div class="tt-overlay-info">
+          <div class="tt-vtitle" id="tt-vtitle"></div>
+          <div class="tt-vauthor" id="tt-vauthor"></div>
+        </div>
       </div>
     </div>
+
+  
+    <div id="tt-image-view" style="display:none;">
+      <div class="tt-slideshow">
+        <div class="tt-slides" id="tt-slides"></div>
+        <button class="tt-slide-nav prev" id="tt-prev" onclick="slideNav(-1)">&#8249;</button>
+        <button class="tt-slide-nav next" id="tt-next" onclick="slideNav(1)">&#8250;</button>
+        <div class="tt-slide-counter" id="tt-counter">1 / 1</div>
+      </div>
+      <div class="tt-slide-dots" id="tt-dots"></div>
+    </div>
+
     <div class="tt-result-body">
       <div class="tt-stats">
-        <div class="tt-stat">
-          <i class="ti ti-clock"></i>
-          <span id="tt-dur"></span>
-        </div>
-        <div class="tt-stat">
-          <i class="ti ti-eye"></i>
-          <span id="tt-plays"></span>
-        </div>
+        <div class="tt-stat"><i class="ti ti-clock"></i><span id="tt-dur"></span></div>
+        <div class="tt-stat"><i class="ti ti-eye"></i><span id="tt-plays"></span></div>
       </div>
-      <div class="tt-dl-row">
+
+     
+      <div class="tt-dl-row" id="tt-video-btns">
         <button class="tt-dl-btn tt-dl-primary" id="tt-nowm" onclick="startDownload('nowm')">
           <i class="ti ti-sparkles" id="tt-nowm-icon"></i>
           <span id="tt-nowm-label">No Watermark</span>
@@ -424,164 +488,394 @@ body {
           <div class="dl-progress" id="tt-wm-progress"></div>
         </button>
       </div>
+
+    
+      <div class="tt-dl-row" id="tt-image-btns" style="display:none;">
+        <button class="tt-dl-btn tt-dl-primary tt-dl-single" id="tt-img-cur" onclick="downloadCurrentImage()">
+          <i class="ti ti-photo" id="tt-img-cur-icon"></i>
+          <span id="tt-img-cur-label">Download This Image</span>
+          <div class="dl-progress" id="tt-img-cur-progress"></div>
+        </button>
+        <button class="tt-dl-btn tt-dl-secondary tt-dl-single" id="tt-img-all" onclick="downloadAllImages()">
+          <i class="ti ti-packages" id="tt-img-all-icon"></i>
+          <span id="tt-img-all-label">Download All</span>
+          <div class="dl-progress" id="tt-img-all-progress"></div>
+        </button>
+      </div>
     </div>
   </div>
 
   <div class="tt-footer">Made by <span>RetrivedMods</span></div>
-
 </div>
 
 <script>
-  let videoUrls = { nowm: '', wm: '' };
+
+  let videoUrls  = { nowm: '', wm: '' };
+  let imageUrls  = [];
   let videoTitle = 'tiktok-video';
+  let slideIndex = 0;
+  let postType   = 'video';
+
+
+  const API_BASE = 'https://wclient.in/apis/tiktok.php';
+
 
   async function ttFetch() {
-    const url = document.getElementById('tt-url').value.trim();
-    const status = document.getElementById('tt-status');
-    const result = document.getElementById('tt-result');
-    const btn = document.getElementById('tt-fetchbtn');
-    const spinner = document.getElementById('tt-spinner');
+    const url        = document.getElementById('tt-url').value.trim();
+    const status     = document.getElementById('tt-status');
+    const result     = document.getElementById('tt-result');
+    const btn        = document.getElementById('tt-fetchbtn');
+    const spinner    = document.getElementById('tt-spinner');
     const statusText = document.getElementById('tt-status-text');
 
-    status.className = 'tt-status';
+    status.className   = 'tt-status';
     result.style.display = 'none';
 
     if (!url) {
-      status.className = 'tt-status error';
-      spinner.style.display = 'none';
-      statusText.textContent = 'Please paste a TikTok URL first.';
+      showError('Please paste a TikTok URL first.');
       return;
     }
 
-    status.className = 'tt-status loading';
+    status.className  = 'tt-status loading';
     spinner.style.display = 'block';
-    statusText.textContent = 'Fetching video info…';
+    statusText.textContent = 'Fetching info…';
     btn.disabled = true;
 
     try {
-      const res = await fetch(`https://wclient.in/apis/tiktok.php?url=${encodeURIComponent(url)}`);
+      const res  = await fetch(`${API_BASE}?url=${encodeURIComponent(url)}`);
       const data = await res.json();
 
       if (!data.status) {
-        status.className = 'tt-status error';
-        spinner.style.display = 'none';
-        statusText.textContent = data.message || 'Failed to fetch video.';
+        showError(data.message || 'Failed to fetch.');
         btn.disabled = false;
         return;
       }
 
-      document.getElementById('tt-thumb').src = data.thumbnail;
-      document.getElementById('tt-vtitle').textContent = data.title;
-      document.getElementById('tt-vauthor').textContent = '@' + data.username;
-      document.getElementById('tt-dur').textContent = data.duration + 's';
-      document.getElementById('tt-plays').textContent = Number(data.play_count).toLocaleString() + ' plays';
+      postType   = data.type || 'video';
+      videoTitle = (data.title || 'tiktok').replace(/[^a-z0-9]/gi, '_').substring(0, 60);
 
-  
-      videoUrls.nowm = data.video_nowm;
-      videoUrls.wm   = data.video_wm;
-      videoTitle = (data.title || 'tiktok-video').replace(/[^a-z0-9]/gi, '_').substring(0, 60);
+    
+      document.getElementById('tt-dur').textContent   = data.duration ? data.duration + 's' : '-';
+      document.getElementById('tt-plays').textContent = Number(data.play_count || 0).toLocaleString() + ' plays';
 
+      if (postType === 'image' && data.images && data.images.length > 0) {
+        imageUrls = data.images;
+        buildSlideshow(data);
+      } else {
+        videoUrls.nowm = data.video_nowm || '';
+        videoUrls.wm   = data.video_wm   || '';
+        buildVideoView(data);
+      }
 
-      resetBtn('nowm');
-      resetBtn('wm');
-
-      status.className = 'tt-status';
+      status.className    = 'tt-status';
       result.style.display = 'block';
 
     } catch (e) {
-      status.className = 'tt-status error';
-      spinner.style.display = 'none';
-      statusText.textContent = 'Network error. Please try again.';
+      showError('Network error. Please try again.');
+      console.error(e);
     }
 
     btn.disabled = false;
   }
 
+ 
+  function buildVideoView(data) {
+    document.getElementById('tt-video-view').style.display = 'block';
+    document.getElementById('tt-image-view').style.display = 'none';
+    document.getElementById('tt-video-btns').style.display = 'flex';
+    document.getElementById('tt-image-btns').style.display = 'none';
+
+   
+    const thumb = document.getElementById('tt-thumb');
+    thumb.src   = data.thumbnail || '';
+    thumb.onerror = () => { thumb.style.display = 'none'; };
+
+    document.getElementById('tt-vtitle').textContent  = data.title    || '';
+    document.getElementById('tt-vauthor').textContent = '@' + (data.username || '');
+
+    resetBtn('nowm');
+    resetBtn('wm');
+  }
+
+ 
+  function buildSlideshow(data) {
+    document.getElementById('tt-video-view').style.display = 'none';
+    document.getElementById('tt-image-view').style.display = 'block';
+    document.getElementById('tt-video-btns').style.display = 'none';
+    document.getElementById('tt-image-btns').style.display = 'flex';
+
+    slideIndex = 0;
+    const slidesEl = document.getElementById('tt-slides');
+    const dotsEl   = document.getElementById('tt-dots');
+    slidesEl.innerHTML = '';
+    dotsEl.innerHTML   = '';
+
+    imageUrls.forEach((imgUrl, i) => {
+  
+      const slide = document.createElement('div');
+      slide.className = 'tt-slide';
+      const img = document.createElement('img');
+      img.src = imgUrl;
+      img.alt = `Image ${i+1}`;
+      img.crossOrigin = 'anonymous';
+      img.onerror = () => { img.src = ''; img.style.background = '#1a1a1a'; };
+
+      const overlay = document.createElement('div');
+      overlay.className = 'tt-slide-overlay';
+
+     
+      if (i === 0) {
+        const info = document.createElement('div');
+        info.className = 'tt-slide-info';
+        info.innerHTML = `<div class="tt-vtitle">${escHtml(data.title || '')}</div><div class="tt-vauthor">@${escHtml(data.username || '')}</div>`;
+        slide.appendChild(img);
+        slide.appendChild(overlay);
+        slide.appendChild(info);
+      } else {
+        slide.appendChild(img);
+        slide.appendChild(overlay);
+      }
+
+      slidesEl.appendChild(slide);
+
+  
+      const dot = document.createElement('button');
+      dot.className = 'tt-dot' + (i === 0 ? ' active' : '');
+      dot.onclick   = () => goToSlide(i);
+      dotsEl.appendChild(dot);
+    });
+
+    updateSlideUI();
+    resetImgBtns();
+  }
+
+  function slideNav(dir) {
+    goToSlide(slideIndex + dir);
+  }
+
+  function goToSlide(idx) {
+    const total = imageUrls.length;
+    if (idx < 0 || idx >= total) return;
+    slideIndex = idx;
+    document.getElementById('tt-slides').style.transform = `translateX(-${slideIndex * 100}%)`;
+    updateSlideUI();
+    resetImgBtns();
+  }
+
+  function updateSlideUI() {
+    const total = imageUrls.length;
+    document.getElementById('tt-counter').textContent = `${slideIndex + 1} / ${total}`;
+    document.getElementById('tt-prev').disabled = slideIndex === 0;
+    document.getElementById('tt-next').disabled = slideIndex === total - 1;
+
+    document.querySelectorAll('.tt-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === slideIndex);
+    });
+  }
+
+
   function resetBtn(type) {
-    const btn      = document.getElementById(`tt-${type}`);
-    const icon     = document.getElementById(`tt-${type}-icon`);
-    const label    = document.getElementById(`tt-${type}-label`);
-    const progress = document.getElementById(`tt-${type}-progress`);
-    btn.disabled       = false;
-    icon.className     = type === 'nowm' ? 'ti ti-sparkles' : 'ti ti-download';
-    label.textContent  = type === 'nowm' ? 'No Watermark' : 'With Watermark';
-    progress.style.width = '0%';
+    const btn  = document.getElementById(`tt-${type}`);
+    const icon = document.getElementById(`tt-${type}-icon`);
+    const lbl  = document.getElementById(`tt-${type}-label`);
+    const prog = document.getElementById(`tt-${type}-progress`);
+    btn.disabled          = false;
+    icon.style.animation  = '';
+    icon.className        = type === 'nowm' ? 'ti ti-sparkles' : 'ti ti-download';
+    lbl.textContent       = type === 'nowm' ? 'No Watermark' : 'With Watermark';
+    prog.style.width      = '0%';
   }
 
   async function startDownload(type) {
-    const videoUrl = videoUrls[type];
-    if (!videoUrl) return;
+    const dlUrl = videoUrls[type];
+    if (!dlUrl) { showError('Download URL not available.'); return; }
 
-    const btn      = document.getElementById(`tt-${type}`);
-    const icon     = document.getElementById(`tt-${type}-icon`);
-    const label    = document.getElementById(`tt-${type}-label`);
-    const progress = document.getElementById(`tt-${type}-progress`);
+    const btn  = document.getElementById(`tt-${type}`);
+    const icon = document.getElementById(`tt-${type}-icon`);
+    const lbl  = document.getElementById(`tt-${type}-label`);
+    const prog = document.getElementById(`tt-${type}-progress`);
 
-    btn.disabled      = true;
-    icon.className    = 'ti ti-loader-2';
+    btn.disabled         = true;
+    icon.className       = 'ti ti-loader-2';
     icon.style.animation = 'spin 0.7s linear infinite';
-    label.textContent = 'Downloading…';
-    progress.style.width = '0%';
+    lbl.textContent      = 'Downloading…';
+    prog.style.width     = '0%';
 
+    const suffix = type === 'nowm' ? 'no_watermark' : 'watermark';
+    const fname  = `${videoTitle}_${suffix}.mp4`;
+
+    const ok = await downloadFile(dlUrl, fname, prog);
+
+    icon.style.animation = '';
+    if (ok) {
+      icon.className  = 'ti ti-check';
+      lbl.textContent = 'Downloaded!';
+      setTimeout(() => resetBtn(type), 3000);
+    } else {
+      icon.className  = 'ti ti-alert-triangle';
+      lbl.textContent = 'Failed - Retry';
+      btn.disabled    = false;
+    }
+  }
+
+
+  function resetImgBtns() {
+    const cur  = document.getElementById('tt-img-cur');
+    const all  = document.getElementById('tt-img-all');
+    cur.disabled = false;
+    all.disabled = false;
+    document.getElementById('tt-img-cur-icon').className  = 'ti ti-photo';
+    document.getElementById('tt-img-cur-icon').style.animation = '';
+    document.getElementById('tt-img-cur-label').textContent = 'Download This Image';
+    document.getElementById('tt-img-cur-progress').style.width = '0%';
+    document.getElementById('tt-img-all-icon').className  = 'ti ti-packages';
+    document.getElementById('tt-img-all-icon').style.animation = '';
+    document.getElementById('tt-img-all-label').textContent = 'Download All';
+    document.getElementById('tt-img-all-progress').style.width = '0%';
+  }
+
+  async function downloadCurrentImage() {
+    const imgUrl = imageUrls[slideIndex];
+    if (!imgUrl) return;
+
+    const btn  = document.getElementById('tt-img-cur');
+    const icon = document.getElementById('tt-img-cur-icon');
+    const lbl  = document.getElementById('tt-img-cur-label');
+    const prog = document.getElementById('tt-img-cur-progress');
+
+    btn.disabled         = true;
+    icon.className       = 'ti ti-loader-2';
+    icon.style.animation = 'spin 0.7s linear infinite';
+    lbl.textContent      = 'Downloading…';
+
+    const fname = `${videoTitle}_image_${slideIndex + 1}.jpg`;
+    const ok    = await downloadFile(imgUrl, fname, prog);
+
+    icon.style.animation = '';
+    if (ok) {
+      icon.className  = 'ti ti-check';
+      lbl.textContent = 'Downloaded!';
+      setTimeout(resetImgBtns, 2500);
+    } else {
+      icon.className  = 'ti ti-alert-triangle';
+      lbl.textContent = 'Failed - Retry';
+      btn.disabled    = false;
+    }
+  }
+
+  async function downloadAllImages() {
+    if (!imageUrls.length) return;
+
+    const btn  = document.getElementById('tt-img-all');
+    const icon = document.getElementById('tt-img-all-icon');
+    const lbl  = document.getElementById('tt-img-all-label');
+    const prog = document.getElementById('tt-img-all-progress');
+
+    btn.disabled         = true;
+    icon.className       = 'ti ti-loader-2';
+    icon.style.animation = 'spin 0.7s linear infinite';
+
+    let failed = 0;
+    for (let i = 0; i < imageUrls.length; i++) {
+      lbl.textContent    = `Downloading ${i + 1} / ${imageUrls.length}…`;
+      prog.style.width   = Math.round(((i) / imageUrls.length) * 100) + '%';
+      const fname = `${videoTitle}_image_${i + 1}.jpg`;
+      const ok    = await downloadFile(imageUrls[i], fname, null);
+      if (!ok) failed++;
+     
+      await sleep(400);
+    }
+
+    prog.style.width = '100%';
+    icon.style.animation = '';
+
+    if (failed === 0) {
+      icon.className  = 'ti ti-check';
+      lbl.textContent = 'All Downloaded!';
+    } else {
+      icon.className  = 'ti ti-alert-triangle';
+      lbl.textContent = `${failed} failed - Retry`;
+      btn.disabled    = false;
+    }
+    setTimeout(resetImgBtns, 3000);
+  }
+
+
+  async function downloadFile(url, filename, progressEl) {
+  
     try {
-      const response = await fetch(videoUrl);
+      const resp = await fetch(url, { mode: 'cors' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
 
-      if (!response.ok) throw new Error('Fetch failed');
-
-      const contentLength = response.headers.get('Content-Length');
-      const total = contentLength ? parseInt(contentLength, 10) : 0;
-      const reader = response.body.getReader();
-      const chunks = [];
-      let received = 0;
+      const contentLength = resp.headers.get('Content-Length');
+      const total         = contentLength ? parseInt(contentLength, 10) : 0;
+      const reader        = resp.body.getReader();
+      const chunks        = [];
+      let received        = 0;
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
         chunks.push(value);
         received += value.length;
-        if (total > 0) {
-          progress.style.width = Math.min(100, Math.round((received / total) * 100)) + '%';
-        } else {
-  
-          progress.style.transition = 'none';
-          progress.style.width = '60%';
+        if (progressEl) {
+          progressEl.style.width = (total > 0
+            ? Math.min(100, Math.round((received / total) * 100))
+            : 60) + '%';
         }
       }
 
-      progress.style.width = '100%';
+      if (progressEl) progressEl.style.width = '100%';
 
-      const blob = new Blob(chunks, { type: 'video/mp4' });
+      const blob    = new Blob(chunks);
       const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = `${videoTitle}_${type === 'nowm' ? 'no_watermark' : 'watermark'}.mp4`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      triggerAnchorDownload(blobUrl, filename);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 15000);
+      return true;
 
-  
-      setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
-
-      icon.style.animation = '';
-      icon.className = 'ti ti-check';
-      label.textContent = 'Downloaded!';
-
-      setTimeout(() => resetBtn(type), 3000);
-
-    } catch (err) {
-      icon.style.animation = '';
-      icon.className = 'ti ti-alert-triangle';
-      label.textContent = 'Failed — Retry';
-      progress.style.width = '0%';
-      btn.disabled = false;
-      console.error('Download error:', err);
+    } catch (fetchErr) {
+      console.warn('Fetch download failed, falling back to anchor:', fetchErr);
+     
+      try {
+        triggerAnchorDownload(url, filename);
+        if (progressEl) progressEl.style.width = '100%';
+        return true;
+      } catch (e) {
+        console.error('Anchor download also failed:', e);
+        return false;
+      }
     }
   }
 
-  document.getElementById('tt-url').addEventListener('keydown', function(e) {
+  function triggerAnchorDownload(href, filename) {
+    const a = document.createElement('a');
+    a.href     = href;
+    a.download = filename;
+    a.target   = '_blank';
+    a.rel      = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+ 
+  function showError(msg) {
+    const status = document.getElementById('tt-status');
+    document.getElementById('tt-spinner').style.display = 'none';
+    document.getElementById('tt-status-text').textContent = msg;
+    status.className = 'tt-status error';
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+
+  document.getElementById('tt-url').addEventListener('keydown', e => {
     if (e.key === 'Enter') ttFetch();
   });
 </script>
-
 </body>
 </html>

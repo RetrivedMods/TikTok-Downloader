@@ -1,11 +1,20 @@
-# TikTok Downloader
+# Instagram Downloader
 
-TikTok video downloader website
+![JavaScript](https://img.shields.io/badge/JavaScript-yellow)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-Download TikTok videos without watermark using a public API.
+Instagram downloader website for downloading reels, videos, photos, and carousel posts.
 
----
+## Features
+
+- Reels Downloader
+- Video Downloader
+- Photo Downloader
 
 ## Usage
 
-Paste a TikTok video URL and click download.
+Paste an Instagram URL and click **Download**.
+
+## License
+
+MIT License
